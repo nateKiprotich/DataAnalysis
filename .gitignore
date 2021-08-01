@@ -1,2 +1,4 @@
 venv*
 .idea*
+*.swp
+__*cache*__
