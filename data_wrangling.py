@@ -1,4 +1,6 @@
 import read_data as rd
+import numpy as np
+import pandas as pd
 
 df = rd.read_csv()
 
@@ -30,6 +32,45 @@ df["city-mpg"] = 235/df["city-mpg"]
 
 df.rename(columns={"city-mpg": "city-L/100km"}, inplace=True)
 
-
 # Data Normalization
+
+# Simple Feature scaling 
+
+def simple_feature_scaling(df):
+
+    print(df)
+    df = df / df.max()
+    print(df)
+
+simple_feature_scaling(df["length"])
+
+# Min-max
+
+def min_max(df):
+    print(df)
+    df = (df - df.min()) / (df.max() - df.min())
+    print(df)
+
+min_max(df["length"])
+
+
+
+
+def z_score(df):
+    print(df)
+    df = (df-df.mean()) / df.std()
+    print(df)
+
+z_score(df["length"])
+
+df["price"].replace("?", 0, inplace=True)
+df["price"] = df["price"].astype(float)
+
+
+# Binning
+bins = np.linspace(min(df["price"]), max(df["price"]),4)
+group_names = ["Low", "Medium", "High"]
+df["price-binned"] = pd.cut(df["price"], bins, labels=group_names, include_lowest=True)
+
+print(df["price-binned"])
 
