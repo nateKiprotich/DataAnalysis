@@ -1,6 +1,9 @@
 import read_data as rd
 import numpy as np
 import pandas as pd
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+
 
 df = rd.read_csv()
 
@@ -55,7 +58,6 @@ min_max(df["length"])
 
 
 
-
 def z_score(df):
     print(df)
     df = (df-df.mean()) / df.std()
@@ -74,3 +76,5 @@ df["price-binned"] = pd.cut(df["price"], bins, labels=group_names, include_lowes
 
 print(df["price-binned"])
 
+# Convert 
+print(pd.get_dummies(df["fuel-type"]))
